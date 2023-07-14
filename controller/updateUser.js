@@ -31,10 +31,8 @@ async function updateUser(req, resp) {
         gender: req.body.gender,
         email: req.body.email,
         image: uniquefileName,
-        passwd: req.body.passwd,
         updatedAt: Date.now(),
       };
-      // req.body.image = uniquefileName;
       const data = await userData.update(updateData, {
         where: {
           id: req.body.id,
@@ -49,7 +47,6 @@ async function updateUser(req, resp) {
           id: req.body.id,
         },
       });
-
       console.log("data1", data);
     }
     resp.status(200).json({

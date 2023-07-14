@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     age: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         min: 1,

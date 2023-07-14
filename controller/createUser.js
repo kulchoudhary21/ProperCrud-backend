@@ -2,12 +2,15 @@ const path = require("path");
 const db = require("../db/db");
 const userData = db.userdata;
 const Validation=require("../utils/errorMessage")
+const passwordBycrpt=require("../utils/passwordBycrpt")
 async function createUser(req, resp) {
   try {
-    // console.log("req.body",req.body)
-    // console.log("req.files",req.files.file)
+    let hasCode=""
+    const hashPasswd=passwordBycrpt(req.body.passwd)
+    await hashPasswd.then((encode)=>{
+      hasCode=encode
+    })
     const file = req.files.myfile;
-    // console.log(file);
     var uniquefileName = Date.now() + "_" + file.name;
     var pathname = path.join(
       __dirname,
@@ -21,6 +24,8 @@ async function createUser(req, resp) {
         console.log("successfull updated image");
       }
     });
+    console.log("---",hasCode)
+    req.body.passwd=hasCode
     req.body.image = uniquefileName;
     console.log("--", req.body.name);
     console.log(req.body);
@@ -29,7 +34,6 @@ async function createUser(req, resp) {
       message: "created suucessfully",
       status: 200,
     });
-    console.log("data1", data);
   } catch (err) {
     console.log("error....: ", err);
     let msg=Validation(err)

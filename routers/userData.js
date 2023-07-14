@@ -10,10 +10,6 @@ router.post("/create", (req, resp) => {
   return createUser(req, resp);
 });
 
-router.get("/get", (req, resp) => {
-  return getUser(req, resp);
-});
-
 router.get("/getOne/:id", (req, resp) => {
   return getOneUser(req, resp);
 });
@@ -22,8 +18,12 @@ router.put("/update", (req, resp) => {
   return updateUser(req, resp);
 });
 
-router.put("/delete/:id", (req, resp) => {
+router.delete("/delete/:id", (req, resp) => {
   console.log("delete api calling");
   return deleteUser(req, resp);
+});
+
+router.post("/get", (req, resp) => {
+  return getUser(req, resp);
 });
 module.exports = router;
