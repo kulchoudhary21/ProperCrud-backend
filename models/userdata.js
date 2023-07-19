@@ -24,6 +24,15 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    userType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        isIn: [["shopOwner", "user"]],
+        notEmpty: true,
+      },
+    },
     gender: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -71,9 +80,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     isDelete: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "false",
+      defaultValue: false,
       validate: {
         notNull: true,
         notEmpty: true,

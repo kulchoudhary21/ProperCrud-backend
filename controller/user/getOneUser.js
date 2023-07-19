@@ -1,6 +1,6 @@
 const path = require("path");
-const db = require("../db/db");
-const Validation = require("../utils/errorMessage");
+const db = require("../../db/db");
+const Validation = require("../../utils/errorMessage");
 const userdata = db.userdata;
 
 async function getOneUser(req, resp) {

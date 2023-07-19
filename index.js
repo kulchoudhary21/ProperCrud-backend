@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const userData = require("./routers/userData");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+const products=require("./routers/products")
 const app = express();
 app.use(cors());
 app.use(
@@ -12,9 +13,10 @@ app.use(
     extended: true,
   })
 );
-app.use(express.static(path.join(__dirname, "./assets/userDataImages")));
+app.use(express.static(path.join(__dirname, "./assets")));
 app.use(bodyParser.json());
 app.use(fileUpload());
 app.use("/user", userData);
+app.use("/product",products)
 
 app.listen(3001);

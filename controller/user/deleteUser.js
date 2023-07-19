@@ -1,11 +1,11 @@
-const db = require("../db/db");
+const db = require("../../db/db");
 const userdata = db.userdata;
-const Validation = require("../utils/errorMessage");
-function deleteUser(req, resp) {
+const Validation = require("../../utils/errorMessage");
+async function deleteUser(req, resp) {
   try {
     const id = req.params.id;
     console.log("idd:", id);
-    const data = userdata.update(
+    const data = await userdata.update(
       { isDelete: true },
       {
         where: {

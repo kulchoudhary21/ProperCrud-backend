@@ -1,6 +1,6 @@
 function Validation(err) {
   let msg = "";
-  if (err) {
+  if (err.errors) {
     err.errors.forEach((error) => {
       console.log("eeeeee", error.message);
       switch (error.validatorKey) {
