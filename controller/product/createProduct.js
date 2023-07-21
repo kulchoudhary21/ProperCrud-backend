@@ -4,7 +4,7 @@ const Validation = require("../../utils/errorMessage");
 const products = db.products;
 async function createProduct(req, resp) {
   try {
-    console.log("bodi product",req.body)    
+    console.log("bodi headers",req.headers['x-auth-token'])    
     const file = req.files.myfile;
     var uniquefileName = Date.now() + "_" + file.name;
     var pathname = path.join(

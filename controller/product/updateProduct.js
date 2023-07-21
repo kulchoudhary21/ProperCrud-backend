@@ -27,6 +27,7 @@ async function updateProduct(req, resp) {
         productName: req.body.productName,
         productModel: req.body.productModel,
         productTitle: req.body.productTitle,
+        price:req.body.price,
         image: uniquefileName,
         updatedAt: Date.now(),
       };
@@ -47,7 +48,7 @@ async function updateProduct(req, resp) {
       console.log("data1", data);
     }
     resp.status(200).json({
-      message: "created suucessfully",
+      message: "updated suucessfully",
       status: 200,
     });
   } catch (err) {

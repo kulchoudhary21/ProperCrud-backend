@@ -24,6 +24,7 @@ async function LoginUser(req, resp) {
           email: data[0].dataValues.email,
           gender: data[0].dataValues.gender,
           userType: data[0].dataValues.userType,
+          image:data[0].dataValues.image
         };
         console.log("uuuuuuuu", user);
         const token = await jwttoken(user);
@@ -31,7 +32,7 @@ async function LoginUser(req, resp) {
         console.log("ccc", crpto);
         console.log("tokennnn", token); // return true
         resp.status(200).json({
-          message: "login suucessfully",
+          message: "Login suucessfully",
           status: 200,
           token: token,
           userdataAccess: crpto,
@@ -49,8 +50,9 @@ async function LoginUser(req, resp) {
       });
     }
   } catch (err) {
-    console.log(err);
-    let msg = Validation(err);
+    console.log("why",err);
+    // let msg = Validation(err);
+    let msg="Username is incorrect"
     console.log("eee", err);
     resp.status(400).json({
       message: msg,
@@ -69,7 +71,7 @@ async function decryptjwttoken(token) {
   if (!token) {
     return null;
   } else {
-    return await jwt.verify(token, getUrl.cryptojs);
+    return await jwt.verify(token, getUrl.jwtsecret);
   }
 }
 async function crypto(user) {

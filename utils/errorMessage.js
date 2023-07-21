@@ -32,8 +32,10 @@ function Validation(err) {
           msg = error.message;
       }
     });
+  } else {
+    console.log("ooooo", err.message);
+    msg+=err.message
   }
-
   return msg;
 }
 module.exports = Validation;

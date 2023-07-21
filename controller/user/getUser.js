@@ -2,6 +2,7 @@ const { Op } = require("sequelize");
 const db = require("../../db/db");
 const Validation = require("../../utils/errorMessage");
 const userData = db.userdata;
+const products=db.products
 async function getUser(req, resp) {
   try {
     let condition = {
@@ -37,6 +38,7 @@ async function getUser(req, resp) {
     const page = pageNumber;
     console.log(`count ${amount}`);
     const data = await userData.findAll({
+      include:products,
       where: condition,
       attributes: {
         exclude: ["passwd"],

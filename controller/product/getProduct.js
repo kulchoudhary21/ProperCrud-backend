@@ -1,9 +1,11 @@
 const { Op } = require("sequelize");
 const db = require("../../db/db");
 const Validation = require("../../utils/errorMessage");
+const userdata = db.userdata;
 const products = db.products;
 async function getProduct(req, resp) {
   try {
+    console.log("headrss..", req.header("x-auth-token"));
     let condition = {
       isDelete: false,
     };
@@ -36,12 +38,59 @@ async function getProduct(req, resp) {
     const pageSize = 10;
     const page = pageNumber;
     console.log(`count ${amount}`);
-    const data = await products.findAll({
-      where: condition,
-      offset: pageSize * page,
-      limit: pageSize,
-      order: [["productName", "ASC"]],
-    });
+
+    const currentUser = req.user;
+    console.log("current user", currentUser);
+    let data = {};
+    if (currentUser) {
+      if (currentUser.userType == "shopOwner") {
+        console.log("yeyeyey");
+        console.log("Condition...", condition);
+        let Alldata = await userdata.findAll({
+          where: {
+            id: currentUser.id,
+            isDelete:false
+          },
+          include: {
+            model: products,
+            where: condition,
+            offset: pageSize * page,
+            limit: pageSize,
+            order: [["productName", "ASC"]],
+          },
+        });
+        data = Alldata[0].products;
+      } else if (currentUser.userType == "admin") {
+        let Alldata = await products.findAll({
+          where: condition,
+          offset: pageSize * page,
+          limit: pageSize,
+          order: [["productName", "ASC"]],
+          include: {
+            model: userdata,
+            where: {
+              isDelete: false,
+            },
+          },
+        });
+        data = Alldata;
+        console.log("------", data);
+      } else {
+        data = await products.findAll({
+          where: condition,
+          offset: pageSize * page,
+          limit: pageSize,
+          order: [["productName", "ASC"]],
+        });
+      }
+    } else {
+      data = await products.findAll({
+        where: condition,
+        offset: pageSize * page,
+        limit: pageSize,
+        order: [["productName", "ASC"]],
+      });
+    }
     if (data) {
       resp.status(200).json({
         status: 200,
