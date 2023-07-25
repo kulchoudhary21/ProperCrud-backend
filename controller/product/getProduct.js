@@ -3,8 +3,18 @@ const db = require("../../db/db");
 const Validation = require("../../utils/errorMessage");
 const userdata = db.userdata;
 const products = db.products;
+const usercart = db.usercart;
 async function getProduct(req, resp) {
   try {
+    const id = req.params.id;
+    const currentUser = req.user;
+    console.log("idd remove cart:", id);
+    const cartcount = await usercart.count({
+      where: {
+        userId: currentUser.id,
+        isDelete: false,
+      },
+    });
     console.log("headrss..", req.header("x-auth-token"));
     let condition = {
       isDelete: false,
@@ -38,8 +48,6 @@ async function getProduct(req, resp) {
     const pageSize = 10;
     const page = pageNumber;
     console.log(`count ${amount}`);
-
-    const currentUser = req.user;
     console.log("current user", currentUser);
     let data = {};
     if (currentUser) {
@@ -49,7 +57,7 @@ async function getProduct(req, resp) {
         let Alldata = await userdata.findAll({
           where: {
             id: currentUser.id,
-            isDelete:false
+            isDelete: false,
           },
           include: {
             model: products,
@@ -97,6 +105,7 @@ async function getProduct(req, resp) {
         data,
         pageSize,
         count: count,
+        cartcount: cartcount,
       });
     }
   } catch (err) {

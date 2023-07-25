@@ -6,6 +6,12 @@ const usercart = db.usercart;
 async function getCart(req, resp) {
   try {
     const currentUser = req.user;
+    const count = await usercart.count({
+      where: {
+        userId: currentUser.id,
+        isDelete: false,
+      },
+    });
     const data = await userdata.findAll({
       where: {
         id: currentUser.id,
@@ -24,16 +30,17 @@ async function getCart(req, resp) {
         },
       ],
     });
-      resp.status(200).json({
-          status: 200,
-          data: data,
-        });
+    resp.status(200).json({
+      status: 200,
+      data: data,
+      count:count
+    });
     // let datas = data[0].usercarts;
     //     resp.status(200).json({
     //       status: 200,
     //       data: datas,
     //     });
-      
+
     // if (data[0]) {
     //   console.log("-----------", data[0]);
     //   let datas = data[0].usercarts;

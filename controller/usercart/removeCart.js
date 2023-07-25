@@ -4,6 +4,7 @@ const usercart = db.usercart;
 async function removeCart(req, resp) {
   try {
     const id = req.params.id;
+    const currentUser = req.user;
     console.log("idd remove cart:", id);
     const data = await usercart.update(
       { isDelete: true },
@@ -13,8 +14,15 @@ async function removeCart(req, resp) {
         },
       }
     );
+    const count = await usercart.count({
+      where: {
+        userId: currentUser.id,
+        isDelete: false,
+      },
+    });
     resp.status(200).json({
       message: "deleted suucessfully",
+      count: count,
       status: 200,
     });
   } catch (err) {

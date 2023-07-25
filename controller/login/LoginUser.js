@@ -67,13 +67,13 @@ async function jwttoken(user) {
   console.log("token:", token);
   return token;
 }
-async function decryptjwttoken(token) {
-  if (!token) {
-    return null;
-  } else {
-    return await jwt.verify(token, getUrl.jwtsecret);
-  }
-}
+// async function decryptjwttoken(token) {
+//   if (!token) {
+//     return null;
+//   } else {
+//     return await jwt.verify(token, getUrl.jwtsecret);
+//   }
+// }
 async function crypto(user) {
   let string = JSON.stringify(user);
   const encrypted = await CryptoJS.AES.encrypt(

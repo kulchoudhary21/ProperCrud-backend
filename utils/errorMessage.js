@@ -5,7 +5,7 @@ function Validation(err) {
       console.log("eeeeee", error.message);
       switch (error.validatorKey) {
         case "len":
-          msg = "username max length should be 10";
+          msg = "Username max length should be 10";
           break;
 
         case "not_unique":
@@ -17,7 +17,7 @@ function Validation(err) {
           break;
 
         case "isIn":
-          msg = "gender should be male or female only";
+          msg = "Gender should be male or female only";
           break;
 
         case "min":

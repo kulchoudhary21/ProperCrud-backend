@@ -6,7 +6,6 @@ try {
     "../public/uploads/TutorAddDocumentImage",
     uniquefileName
   );
-
   file.mv(pathname, (err) => {
     if (err) {
       console.error(err);
@@ -14,7 +13,6 @@ try {
       console.log("successfull updated image");
     }
   });
-
   const data1 = await Add_document.updateOne(
     { _id: req.body._id },
     {
@@ -40,3 +38,4 @@ try {
     status: 400,
   });
 }
+
