@@ -39,3 +39,64 @@ try {
   });
 }
 
+// module.exports = (sequelize, DataTypes) => {
+//   const messages = sequelize.define("messages", {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       autoIncrement: true,
+//       primaryKey: true,
+//       allowNull: false,
+//     },
+//     chatName: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//       validate: {
+//         notNull: true,
+//         notEmpty: true,
+//       },
+//     },
+//     isGroupChat: {
+//       type: DataTypes.BOOLEAN,
+//       allowNull: false,
+//       defaultValue: false,
+//       validate: {
+//         notNull: true,
+//         notEmpty: true,
+//       },
+//     },
+//     latestMessageId: {
+//       type: DataTypes.INTEGER,
+//       allowNull: false,
+//       validate: {
+//         notNull: true,
+//         notEmpty: true,
+//       },
+//     },
+//     groupAdminId: {
+//       type: DataTypes.INTEGER,
+//       allowNull: false,
+//       validate: {
+//         notNull: true,
+//         notEmpty: true,
+//       },
+//     },
+//     userId: {
+//       type: DataTypes.INTEGER,
+//       allowNull: false,
+//       validate: {
+//         notNull: true,
+//         notEmpty: true,
+//       },
+//     },
+//     isDelete: {
+//       type: DataTypes.BOOLEAN,
+//       allowNull: false,
+//       defaultValue: false,
+//       validate: {
+//         notNull: true,
+//         notEmpty: true,
+//       },
+//     },
+//   });
+//   return messages;
+// };
