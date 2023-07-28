@@ -11,14 +11,14 @@ async function createCart(req, resp) {
     //   },
     // });
     const data = await usercart.create(req.body);
-    console.log("usercart detai;s", data);
+    //console.log("usercart detai;s", data);
     resp.status(200).json({
       message: "created suucessfully",
       status: 200,
       // count: count,
     });
   } catch (err) {
-    console.log("error....: ", err);
+    //console.log("error....: ", err);
     let msg = Validation(err);
     resp.status(400).json({
       message: msg,

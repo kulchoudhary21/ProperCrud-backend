@@ -3,7 +3,7 @@ const Validation = require("../../utils/errorMessage");
 async function getOneProduct(req, resp) {
   try {
     const id = req.params.id;
-    console.log("ididid",id)
+    //console.log("ididid",id)
     const data = await products.findOne({
       where: { id: id },
       attributes: {

@@ -4,7 +4,7 @@ const Validation = require("../../utils/errorMessage");
 const chat = db.chats;
 async function verifiedForRoom(req, resp) {
   try {
-    // console.log("req.bodyroom", req.body);
+    // //console.log("req.bodyroom", req.body);
     const data = await chat.findAll({
       where: {
         [Op.or]: [
@@ -23,7 +23,7 @@ async function verifiedForRoom(req, resp) {
         ],
       },
     });
-    console.log("dtetete", data);
+    // //console.log("dtetete", data);
     if (data && data.length > 0) {
       resp.status(200).json({
         status: 200,
@@ -45,7 +45,7 @@ async function verifiedForRoom(req, resp) {
       message: msg,
       roomCheck:false
     });
-    console.log("eeeeeee:", err);
+    // //console.log("eeeeeee:", err);
   }
 }
 module.exports = verifiedForRoom;

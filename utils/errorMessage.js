@@ -2,7 +2,7 @@ function Validation(err) {
   let msg = "";
   if (err.errors) {
     err.errors.forEach((error) => {
-      console.log("eeeeee", error.message);
+      //console.log("eeeeee", error.message);
       switch (error.validatorKey) {
         case "len":
           msg = "Username max length should be 10";
@@ -33,7 +33,7 @@ function Validation(err) {
       }
     });
   } else {
-    console.log("ooooo", err.message);
+    //console.log("ooooo", err.message);
     msg+=err.message
   }
   return msg;

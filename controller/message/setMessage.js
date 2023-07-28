@@ -3,10 +3,10 @@ const Validation = require("../../utils/errorMessage");
 const message = db.messages;
 async function setMessage(req, resp) {
   try {
-    console.log("rerere", req.body);
+    //console.log("rerere", req.body);
     if (req.body.messages) {
       const data = await message.create(req.body);
-      console.log("dtdtdt11", data);
+      //console.log("dtdtdt11", data);
       resp.status(200).json({
         message: "inserted meesage suucessfully",
         status: 200,
@@ -18,7 +18,7 @@ async function setMessage(req, resp) {
       });
     }
   } catch (err) {
-    console.log("error....: ", err);
+    //console.log("error....: ", err);
     let msg = Validation(err);
     resp.status(400).json({
       message: msg,

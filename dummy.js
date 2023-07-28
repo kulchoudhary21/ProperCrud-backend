@@ -8,9 +8,9 @@ try {
   );
   file.mv(pathname, (err) => {
     if (err) {
-      console.error(err);
+      // //console.error(err);
     } else {
-      console.log("successfull updated image");
+      // //console.log("successfull updated image");
     }
   });
   const data1 = await Add_document.updateOne(

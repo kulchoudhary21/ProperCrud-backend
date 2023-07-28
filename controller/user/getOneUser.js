@@ -12,7 +12,7 @@ async function getOneUser(req, resp) {
         exclude: ["passwd"],
       },
     });
-    console.log("---", data[0].dataValues);
+    //console.log("---", data[0].dataValues);
     resp.status(200).json({
       status: 200,
       data,
@@ -23,7 +23,7 @@ async function getOneUser(req, resp) {
       message: msg,
       status: 400,
     });
-    console.log("eeeeeee:", err);
+    //console.log("eeeeeee:", err);
   }
 }
 module.exports = getOneUser;

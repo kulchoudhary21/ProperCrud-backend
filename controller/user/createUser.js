@@ -19,24 +19,24 @@ async function createUser(req, resp) {
     );
     file.mv(pathname, (err) => {
       if (err) {
-        console.error("err image uploading..:", er);
+        //console.error("err image uploading..:", er);
       } else {
-        console.log("successfull updated image");
+        //console.log("successfull updated image");
       }
     });
-    console.log("---", hasCode);
+    //console.log("---", hasCode);
     req.body.passwd = hasCode;
     req.body.image = uniquefileName;
-    console.log("-uu-", req.body.userType);
-    console.log(req.body);
+    //console.log("-uu-", req.body.userType);
+    //console.log(req.body);
     const data = await userData.create(req.body);
-    console.log("dtdtdt", data);
+    //console.log("dtdtdt", data);
     resp.status(200).json({
       message: "created suucessfully",
       status: 200,
     });
   } catch (err) {
-    console.log("error....: ", err);
+    //console.log("error....: ", err);
     let msg = Validation(err);
     resp.status(400).json({
       message: msg,

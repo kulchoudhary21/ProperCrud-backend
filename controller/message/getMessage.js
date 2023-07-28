@@ -14,7 +14,7 @@ async function getMessage(roomId) {
         },
       ],
     });
-    console.log("fetching messages", result);
+    //console.log("fetching messages", result);
     return result;
   } catch (err) {}
 }

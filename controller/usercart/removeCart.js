@@ -5,7 +5,7 @@ async function removeCart(req, resp) {
   try {
     const id = req.params.id;
     const currentUser = req.user;
-    console.log("idd remove cart:", id);
+    //console.log("idd remove cart:", id);
     const data = await usercart.update(
       { isDelete: true },
       {

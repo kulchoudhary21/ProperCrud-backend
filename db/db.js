@@ -9,10 +9,10 @@ const sequelize = new Sequelize("USER", "root", "Admin@123", {
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Connection has been established successfully.");
+    //console.log("Connection has been established successfully.");
   })
   .catch((error) => {
-    console.error("Unable to connect to the database:", error);
+    //console.error("Unable to connect to the database:", error);
   });
 
 const db = {};
@@ -27,16 +27,16 @@ db.messages = require("../models/message")(sequelize, DataTypes);
 db.sequelize
   .sync()
   .then(() => {
-    console.log("tables created successfully!");
+    //console.log("tables created successfully!");
   })
   .catch((error) => {
-    console.error("Unable to create table : ", error);
+    //console.error("Unable to create table : ", error);
   });
-console.log("db.userdata", db.userdata);
-console.log("db.products", db.products);
-console.log("db.usercart", db.usercart);
-console.log("db.chats", db.chats);
-console.log("db.message", db.messages);
+//console.log("db.userdata", db.userdata);
+//console.log("db.products", db.products);
+//console.log("db.usercart", db.usercart);
+//console.log("db.chats", db.chats);
+//console.log("db.message", db.messages);
 
 //-----------one to many---------//
 db.userdata.hasMany(db.products, { foreignKey: "shopOwnerId" });

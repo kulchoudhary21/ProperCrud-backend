@@ -6,7 +6,7 @@ const usercart = db.usercart;
 async function getCountCart(req, resp) {
   try {
     const currentUser = req.user;
-console.log("33333333333333333333333")
+//console.log("33333333333333333333333")
     const count = await usercart.findAll({
       where: {
         userId: currentUser.id,
@@ -27,7 +27,7 @@ console.log("33333333333333333333333")
       status: 400,
       message: msg,
     });
-    console.log("eeeeeee.........:", err);
+    //console.log("eeeeeee.........:", err);
   }
 }
 module.exports = getCountCart;

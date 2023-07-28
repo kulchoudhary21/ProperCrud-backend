@@ -4,12 +4,12 @@ const Validation = require("../../utils/errorMessage");
 const products = db.products;
 async function updateProduct(req, resp) {
   try {
-    console.log("req.body", req.body);
-    console.log("req.files", req.files);
+    //console.log("req.body", req.body);
+    //console.log("req.files", req.files);
 
     if (req.files) {
       const file = req.files.myfile;
-      console.log("ggggg",file);
+      //console.log("ggggg",file);
       var uniquefileName = Date.now() + "_" + file.name;
       var pathname = path.join(
         __dirname,
@@ -18,9 +18,9 @@ async function updateProduct(req, resp) {
       );
       file.mv(pathname, (err) => {
         if (err) {
-          console.error("err image uploading..:", err);
+          //console.error("err image uploading..:", err);
         } else {
-          console.log("successfull updated image");
+          //console.log("successfull updated image");
         }
       });
       const updateData = {
@@ -37,22 +37,22 @@ async function updateProduct(req, resp) {
         },
       });
     } else {
-      console.log("else");
-      console.log("--", req.body);
-      console.log(req.body);
+      //console.log("else");
+      //console.log("--", req.body);
+      //console.log(req.body);
       const data = await products.update(req.body, {
         where: {
           id: req.body.id,
         },
       });
-      console.log("data1", data);
+      //console.log("data1", data);
     }
     resp.status(200).json({
       message: "updated suucessfully",
       status: 200,
     });
   } catch (err) {
-    console.log("error....: ", err.message);
+    //console.log("error....: ", err.message);
     const msg = Validation(err);
     resp.status(400).json({
       message: msg,

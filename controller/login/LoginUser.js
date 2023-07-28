@@ -6,13 +6,13 @@ const getUrl = require("../../utils/constant");
 const CryptoJS = require("crypto-js");
 async function LoginUser(req, resp) {
   try {
-    console.log("req login", req.body);
+    // //console.log("req login", req.body);
     const data = await userdata.findAll({
       where: {
         username: req.body.username,
       },
     });
-    console.log("datain", data[0].dataValues);
+    //console.log("datain", data[0].dataValues);
     if (data[0].dataValues) {
       const hashPassword = data[0].dataValues.passwd;
       const compare = await bcrypt.compare(req.body.passwd, hashPassword);
@@ -26,11 +26,11 @@ async function LoginUser(req, resp) {
           userType: data[0].dataValues.userType,
           image:data[0].dataValues.image
         };
-        console.log("uuuuuuuu", user);
+        //console.log("uuuuuuuu", user);
         const token = await jwttoken(user);
         const crpto = await crypto(user);
-        console.log("ccc", crpto);
-        console.log("tokennnn", token); // return true
+        //console.log("ccc", crpto);
+        //console.log("tokennnn", token); // return true
         resp.status(200).json({
           message: "Login suucessfully",
           status: 200,
@@ -50,10 +50,10 @@ async function LoginUser(req, resp) {
       });
     }
   } catch (err) {
-    console.log("why",err);
+    //console.log("why",err);
     // let msg = Validation(err);
     let msg="Username is incorrect"
-    console.log("eee", err);
+    //console.log("eee", err);
     resp.status(400).json({
       message: msg,
       status: 400,
@@ -62,9 +62,9 @@ async function LoginUser(req, resp) {
 }
 
 async function jwttoken(user) {
-  console.log("user...", getUrl.secre);
+  //console.log("user...", getUrl.secre);
   let token = await jwt.sign(user, getUrl.jwtsecret);
-  console.log("token:", token);
+  //console.log("token:", token);
   return token;
 }
 // async function decryptjwttoken(token) {
@@ -80,7 +80,7 @@ async function crypto(user) {
     string,
     getUrl.cryptojs
   ).toString();
-  console.log("---", encrypted);
+  //console.log("---", encrypted);
   return encrypted;
 }
 module.exports = LoginUser;

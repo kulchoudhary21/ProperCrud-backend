@@ -21,7 +21,7 @@ router.get("/getOneProduct/:id", verifingToken, (req, resp) => {
   return getOneProduct(req, resp);
 });
 router.put("/updateProduct", verifingToken, (req, resp) => {
-  console.log("uuuuuuu",req.body)
+  //console.log("uuuuuuu",req.body)
   return updateProduct(req, resp);
 });
 router.delete("/deleteProduct/:id", verifingToken, (req, resp) => {

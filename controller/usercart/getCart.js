@@ -42,7 +42,7 @@ async function getCart(req, resp) {
     //     });
 
     // if (data[0]) {
-    //   console.log("-----------", data[0]);
+    //   //console.log("-----------", data[0]);
     //   let datas = data[0].usercarts;
     //   if (data[0].usercarts) {
     //     resp.status(200).json({
@@ -61,7 +61,7 @@ async function getCart(req, resp) {
       status: 400,
       message: "Empty cart !",
     });
-    console.log("eeeeeee:", err);
+    //console.log("eeeeeee:", err);
   }
 }
 module.exports = getCart;

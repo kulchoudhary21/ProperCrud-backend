@@ -5,7 +5,7 @@ const userData = db.userdata;
 async function getUsers(req, resp) {
   try {
     const currentUser = req.body.id;
-    console.log("currentUser-----", currentUser);
+    // //console.log("currentUser-----", currentUser);
     const data = await userData.findAll({
       where: {
         isDelete: false,
@@ -29,7 +29,7 @@ async function getUsers(req, resp) {
       status: 400,
       message: msg,
     });
-    console.log("eeeeeee:", err);
+    // //console.log("eeeeeee:", err);
   }
 }
 module.exports = getUsers;

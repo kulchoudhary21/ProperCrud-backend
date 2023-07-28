@@ -4,7 +4,7 @@ const Validation = require("../../utils/errorMessage");
 async function deleteUser(req, resp) {
   try {
     const id = req.params.id;
-    console.log("idd:", id);
+    //console.log("idd:", id);
     const data = await userdata.update(
       { isDelete: true },
       {

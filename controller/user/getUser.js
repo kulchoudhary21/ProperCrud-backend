@@ -26,17 +26,17 @@ async function getUser(req, resp) {
           },
         },
       ];
-      console.log("nnn", noPuncuationSearch);
+      //console.log("nnn", noPuncuationSearch);
     }
     const pageNumber = req.body.pageNumber;
-    console.log("pageNumber", pageNumber);
+    //console.log("pageNumber", pageNumber);
     const amount = await userData.count({
       where: condition,
     });
     const count = Math.ceil(amount / 10);
     const pageSize = 10;
     const page = pageNumber;
-    console.log(`count ${amount}`);
+    //console.log(`count ${amount}`);
     const data = await userData.findAll({
       include:products,
       where: condition,
@@ -61,7 +61,7 @@ async function getUser(req, resp) {
       status: 400,
       message: msg,
     });
-    console.log("eeeeeee:", err);
+    //console.log("eeeeeee:", err);
   }
 }
 module.exports = getUser;

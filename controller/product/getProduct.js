@@ -8,14 +8,14 @@ async function getProduct(req, resp) {
   try {
     const id = req.params.id;
     const currentUser = req.user;
-    console.log("idd remove cart:", id);
+    //console.log("idd remove cart:", id);
     const cartcount = await usercart.count({
       where: {
         userId: currentUser.id,
         isDelete: false,
       },
     });
-    console.log("headrss..", req.header("x-auth-token"));
+    //console.log("headrss..", req.header("x-auth-token"));
     let condition = {
       isDelete: false,
     };
@@ -37,23 +37,23 @@ async function getProduct(req, resp) {
           },
         },
       ];
-      console.log("nnn", noPuncuationSearch);
+      //console.log("nnn", noPuncuationSearch);
     }
     const pageNumber = req.body.pageNumber;
-    console.log("pageNumber", pageNumber);
+    //console.log("pageNumber", pageNumber);
     const amount = await products.count({
       where: condition,
     });
     const count = Math.ceil(amount / 10);
     const pageSize = 10;
     const page = pageNumber;
-    console.log(`count ${amount}`);
-    console.log("current user", currentUser);
+    //console.log(`count ${amount}`);
+    //console.log("current user", currentUser);
     let data = {};
     if (currentUser) {
       if (currentUser.userType == "shopOwner") {
-        console.log("yeyeyey");
-        console.log("Condition...", condition);
+        //console.log("yeyeyey");
+        //console.log("Condition...", condition);
         let Alldata = await userdata.findAll({
           where: {
             id: currentUser.id,
@@ -82,7 +82,7 @@ async function getProduct(req, resp) {
           },
         });
         data = Alldata;
-        console.log("------", data);
+        //console.log("------", data);
       } else {
         data = await products.findAll({
           where: condition,
@@ -114,7 +114,7 @@ async function getProduct(req, resp) {
       status: 400,
       message: msg,
     });
-    console.log("eeeeeee:", err);
+    //console.log("eeeeeee:", err);
   }
 }
 module.exports = getProduct;
