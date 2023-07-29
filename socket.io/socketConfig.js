@@ -1,35 +1,52 @@
 const socket = require("socket.io");
 const getMessage = require("../controller/message/getMessage");
 const setSocketMessage = require("../controller/message/setSocketMessage");
-const setUserMessage=require("../controller/chat/setUserSocket")
-const getUserSelf=require("../controller/chat/getUserSelf")
+const setUserMessage = require("../controller/chat/setUserSocket");
+const getUserSelf = require("../controller/chat/getUserSelf");
 async function socketConfig(server) {
   const io = socket(server, {
     cors: {
       origin: "*",
     },
   });
+
+  // if (socket.room) {
+  //   // Leave the previous room
+  //   socket.leave(socket.room);
+  // }
+
+  // // Join the new room
+  // socket.join(newRoom);
+  // socket.room = newRoom;
+
   io.on("connection", (socket) => {
-    //console.log("socketId", socket.id);
-    socket.on("join_room", async (data) => {
-      //console.log("rooommm...", data);
+    socket.on("join_room", async (data) => {      
+      if (socket.room) {
+        // Leave the previous room
+        socket.leave(socket.room);
+      }
+      // Join the new room
+      socket.join(data);
+      socket.room = data;
+      
+      
+    
       socket.join(data);
       const result = await getMessage(data);
       io.in(data).emit("broadcast", result);
     });
-    socket.on("send_message", async (data,lastMessages) => {
-      console.log("============================================================================data21",data)
+    socket.on("send_message", async (data) => {
+      console.log(
+        "============================================================================data21",
+        data
+      );
       const setSocketMessag = await setSocketMessage(data);
       const result = await getMessage(data.roomId);
-      //console.log("cccc",setSocketMessag)
-      io.to(data.roomId).emit("broadcast", result,lastMessages);
+      io.to(data.roomId).emit("broadcast", result);
     });
-    // getUserSelf
     socket.on("join_room_self", async (roomSelf) => {
-      //console.log("rooommm...",roomSelf);
       socket.join(roomSelf);
       const result = await getUserSelf(roomSelf);
-      //console.log("-hnbhfjnthnghfbnfghnbvghmbgf",result)
       io.to(roomSelf).emit("broadcast_self", result);
     });
 

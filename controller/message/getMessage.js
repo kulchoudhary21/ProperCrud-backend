@@ -3,14 +3,13 @@ const message = db.messages;
 const userdata = db.userdata;
 async function getMessage(roomId) {
   try {
-
+    console.log("rooooooom",roomId)
     const result = await message.findAll({
       where: { roomId: roomId },
       include: [
         {
           model: userdata,
-          where: { isDelete: false },
-          
+          where: { isDelete: false }, 
         },
       ],
     });

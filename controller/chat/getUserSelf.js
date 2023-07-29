@@ -4,18 +4,18 @@ const chat = db.chats;
 const userdata = db.userdata;
 async function getUserSelf(roomIdself) {
   try {
-    // //console.log(roomIdself);
     const result = await chat.findOne({ where: { id: roomIdself } });
-    // //console.log("hihihih:", result.id);
     const data = await userdata.findAll({
-      where: { isDelete: false },
-      id: {
-        [Op.ne]: result.userSenderId,
+      where: {
+        isDelete: false,
+        id: {
+          [Op.ne]: result.userSenderId,
+        },
       },
     });
-    return data
+    return data;
   } catch (err) {
-    // //console.log(err)
+    console.log("err...", err);
   }
 }
 module.exports = getUserSelf;
