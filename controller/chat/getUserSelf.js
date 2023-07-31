@@ -13,7 +13,7 @@ async function getUserSelf(roomIdself) {
         },
       },
     });
-    return data;
+    return data
   } catch (err) {
     console.log("err...", err);
   }

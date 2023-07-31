@@ -38,6 +38,14 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    isRead: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
     isDelete: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -50,3 +58,13 @@ module.exports = (sequelize, DataTypes) => {
   });
   return messages;
 };
+
+// const queryInterface = sequelize.getQueryInterface();
+//   queryInterface.addColumn("messages", "isRead", {
+//     type: DataTypes.BOOLEAN,
+//     allowNull: false,
+//     validate: {
+//       notNull: true,
+//       notEmpty: true,
+//     },
+//   });

@@ -3,7 +3,6 @@ const db=require("../../db/db")
 const chat=db.chats
 async function setUserMessage(obj) {
   try {
-    // //console.log(":nononon", obj);
     const userSenderId = obj.userSenderId;
     const data = await chat.findAll({
       where: {
