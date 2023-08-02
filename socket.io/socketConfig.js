@@ -4,6 +4,8 @@ const setSocketMessage = require("../controller/message/setSocketMessage");
 const setUserMessage = require("../controller/chat/setUserSocket");
 const getUserSelf = require("../controller/chat/getUserSelf");
 const getIndivisualSelfId = require("../controller/chat/getIndivisualSelfId");
+const lastMessage=require("../controller/message/lastMessage");
+const AllUsersDataWithLastMessage = require("../controller/chat/AllUsersDataWithLastMessage");
 async function socketConfig(server) {
   const io = socket(server, {
     cors: {
@@ -22,19 +24,24 @@ async function socketConfig(server) {
     });
     socket.on("send_message", async (data) => {
       const setSocketMessag = await setSocketMessage(data);
-      console.log("data....", data.isRead);
       const result = await getMessage(data.roomId);
+      console.log(".......ssdsw0.",data)
+
       const indivisualSelfID = await getIndivisualSelfId(data);
       io.to(data.roomId).emit("broadcast", result);
-      io.to(indivisualSelfID.senderSelfId.id).emit(
+
+      const userdatas=await lastMessage(data.userReceiverId,data.userSenderId) 
+      // const userdatas=await AllUsersDataWithLastMessage(data.userSenderId)
+      io.to(indivisualSelfID.receiverSelfId.id).emit(
         "sender_selfid",
-        result
+        userdatas
       );
     });
 
-    socket.on("join_room_self", async (roomSelf) => {
+    socket.on("join_room_self", async (roomSelf,receiverIdd) => {
       socket.join(roomSelf);
-      const result = await getUserSelf(roomSelf);
+      // const result = await getUserSelf(roomSelf);
+      const result=await AllUsersDataWithLastMessage(receiverIdd)
       console.log("room self id");
       io.to(roomSelf).emit("broadcast_self", result);
     });
@@ -60,3 +67,8 @@ module.exports = socketConfig;
 //   console.log("cccc",setSocketMessag)
 //    io.in(data.roomId).emit("broadcast_self", result,lastMessages);
 //  });
+
+
+// ----roomid pe 
+//     -----particular reciver id
+//          ----get count on behalf of its isRead ? or not .

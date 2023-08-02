@@ -29,7 +29,7 @@ async function getIndivisualSelfId(data) {
       return selfId;
     }
   } catch (err) {
-    console.log("erere",err)
+    console.log("erere", err);
   }
 }
 module.exports = getIndivisualSelfId;
