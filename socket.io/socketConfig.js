@@ -25,13 +25,13 @@ async function socketConfig(server) {
     socket.on("send_message", async (data) => {
       const setSocketMessag = await setSocketMessage(data);
       const result = await getMessage(data.roomId);
-      console.log(".......ssdsw0.",data)
 
       const indivisualSelfID = await getIndivisualSelfId(data);
       io.to(data.roomId).emit("broadcast", result);
 
       const userdatas=await lastMessage(data.userReceiverId,data.userSenderId) 
       // const userdatas=await AllUsersDataWithLastMessage(data.userSenderId)
+      if(indivisualSelfID?.receiverSelfId?.id)
       io.to(indivisualSelfID.receiverSelfId.id).emit(
         "sender_selfid",
         userdatas
