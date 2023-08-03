@@ -71,7 +71,6 @@ async function AllUsersDataWithLastMessage(receiverIdd) {
           },
         },
       });
-
       if (messageAndUser?.length > 0) {
         let users = {
           id: messageAndUser[0].userdatum.id,
